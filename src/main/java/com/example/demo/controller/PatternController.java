@@ -7,12 +7,21 @@ public class PatternController {
 
     public static void main(String[] args) {
 
-        String fileName = "1546_ba_00_p_3000x2250_20200624.jpg";
+        getTargetString();
 
-        System.out.println("byPattern:" + byPattern(fileName));
+    }
 
-        System.out.println("byIndex:" + byIndex(fileName));
-
+    /**
+     * 正则获取指定字符串
+     */
+    public static void getTargetString(){
+        String text = "Superior room with double bed, Jean-Philippe Nuel design. Contemporary design, from 25 sqm, Sofitel MyBed TM, shower, Hermes courtesy set, Illy coffee machine and Dammann tea machine, minibar, BOSE sound system, 49\" TV, free WI-FI.";
+        Pattern pattern = Pattern.compile("(from )(\\d+)( sqm)");
+        Matcher matcher = pattern.matcher(text);
+        if(matcher.find()){
+            String area = matcher.group(2);
+            System.out.println(area);
+        }
     }
 
     public static Integer byPattern(String fileName){

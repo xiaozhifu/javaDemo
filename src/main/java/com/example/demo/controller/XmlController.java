@@ -12,10 +12,8 @@ import org.dom4j.io.SAXReader;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class XmlController {
 
@@ -23,6 +21,10 @@ public class XmlController {
         testXStream();
     }
 
+    /**
+     * Xstream xml 转 bean
+     * @throws Exception
+     */
     public static void testXStream() throws Exception{
         System.out.println("开始           " + LocalDateTime.now());
         String xmlChinese = null;
@@ -48,51 +50,11 @@ public class XmlController {
         System.out.println(hotelDescriptiveContent);
     }
 
+    /**
+     * Dom4j 解析 xml
+     * @throws Exception
+     */
     public static void testDom4j() throws Exception {
-        HotelInfo hotelInfo = new HotelInfo();
-        //1.创建Reader对象
-        SAXReader reader = new SAXReader();
-        String xml = OkHttpUtils.get("https://repos.accor.com/ota/0338.xml");
-        //2.加载xml
-        Document document = reader.read(new ByteArrayInputStream(xml.toString().getBytes("UTF-8")));
-        //3.获取根节点
-        Element rootElement = document.getRootElement();
-        Iterator iterator = rootElement.elementIterator();
-        while (iterator.hasNext()) {
-            Element hotelDescriptiveContents = (Element) iterator.next();
-            Iterator iterator1 = hotelDescriptiveContents.elementIterator();
-            while (iterator1.hasNext()) {
-                Element hotelDescriptiveContent = (Element) iterator1.next();
-                if (hotelDescriptiveContent.getName().equals("HotelDescriptiveContent")) {
-                    List<Attribute> attributes = hotelDescriptiveContent.attributes();
-                    Map<String, String> attributesMap = new HashMap<>();
-                    attributes.forEach(attribute -> {
-                        attributesMap.put(attribute.getName(), attribute.getValue());
-                    });
-                    if ("zh".equals(attributesMap.get("LanguageCode"))) {
-                        hotelInfo.setHotelName(attributesMap.get("HotelName"));
-                        hotelInfo.setHotelNo(attributesMap.get("HotelCode"));
-                        Iterator iterator2 = hotelDescriptiveContent.elementIterator();
-                        while (iterator2.hasNext()) {
-                            Element element = (Element) iterator2.next();
-                            if (element.getName().equals("HotelInfo")) {
-                                System.out.println("HotelInfo");
-                            } else if (element.getName().equals("FacilityInfo")) {
-                                System.out.println("FacilityInfo");
-                            } else if (element.getName().equals("Policies")) {
-                                System.out.println("Policies");
-                            } else {
-                                System.out.println("------------------");
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        System.out.println(hotelInfo);
-    }
-
-    public static void test() throws Exception {
         String xml = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
                 "<class>\n" +
                 "    <student rollno=\"492\">\n" +

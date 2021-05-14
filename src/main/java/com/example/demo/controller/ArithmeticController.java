@@ -37,7 +37,7 @@ public class ArithmeticController {
     }
 
     /**
-     * 拉链法求交集
+     * 拉链法求并集
      */
     public static void bingJi(){
         int[] arr1 = {1,3,3,5,8};

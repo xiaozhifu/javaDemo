@@ -97,22 +97,6 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>hzrepo</id>
-            <name>hz nexus</name>
-            <url>http://nexus.huazhu.com:8081/repository/maven-public/</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>hzrepo</id>
-            <name>hz nexus</name>
-            <url>http://nexus.huazhu.com:8081/repository/maven-public/</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <build>
         <plugins>
             <plugin>

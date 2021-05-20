@@ -4,12 +4,20 @@ import java.net.MalformedURLException;
 
 public class TestController {
 
+    private ThreadLocal b = new ThreadLocal();
+
     public static void main(String[] args) throws MalformedURLException {
 
-        long serialNumber = 1L;
-        String res =  String.format("D%07d", serialNumber);
+        Thread a = new Thread(new Runnable() {
 
-        System.out.println(res);
+            @Override
+            public void run() {
+                System.out.println("1");
+            }
+
+        });
+
+        a.start();
 
     }
 
